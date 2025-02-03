@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
+import NotFoundPages from "@/app/not-found";
 
 const ServicePage = () => {
   const params = useParams(); // Get params dynamically
@@ -47,28 +48,31 @@ const ServicePage = () => {
 
   // Find product by ID
   const selectedProduct = data.find((d) => d.id == id);
-
-  return (
-    <div>
-      <h2>Dynamic Page</h2>
-      <p>ID: {id}</p>
-      {selectedProduct ? (
-        <div>
-          <p>Name: {selectedProduct.name}</p>
-          <p>Category: {selectedProduct.category}</p>
-          <p>Price: ${selectedProduct.price}</p>
-          <img
-            src={selectedProduct.image}
-            alt={selectedProduct.name}
-            width="300"
-          />
-          <p>Description: {selectedProduct.description}</p>
-        </div>
-      ) : (
-        <p>Product not found</p>
-      )}
-    </div>
-  );
+  if (selectedProduct) {
+    return (
+      <div>
+        <h2>Dynamic Page</h2>
+        <p>ID: {id}</p>
+        {selectedProduct ? (
+          <div>
+            <p>Name: {selectedProduct.name}</p>
+            <p>Category: {selectedProduct.category}</p>
+            <p>Price: ${selectedProduct.price}</p>
+            <img
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+              width="300"
+            />
+            <p>Description: {selectedProduct.description}</p>
+          </div>
+        ) : (
+          <p>Product not found</p>
+        )}
+      </div>
+    );
+  } else {
+    return <div className="text-yellow-500">Not found</div>;
+  }
 };
 
 export default ServicePage;

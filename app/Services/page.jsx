@@ -51,7 +51,7 @@ const ServicesPage = () => {
         </p>
         <div>
           {data.map((d) => (
-            <div>
+            <div key={d.id}>
               <Link href={`/Services/${d.id}`}>
                 <img src={d.image} />
               </Link>
