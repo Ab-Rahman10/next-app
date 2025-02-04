@@ -14,7 +14,7 @@ export function middleware(request) {
 
   if (isServicesPage && !isAdmin) {
     return NextResponse.redirect(new URL("/login", request.url));
+  } else {
+    return NextResponse.next();
   }
-
-  return NextResponse.next();
 }
